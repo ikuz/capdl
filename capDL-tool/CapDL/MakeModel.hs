@@ -238,6 +238,8 @@ getExtraInfo n params =
     case (getTCBAddr params, getTCBip params, getTCBsp params, getTCBprio params, getTCBmax_prio params, getTCBaffinity params, getTCBresume params) of
         (Just addr, Just ip, Just sp, Just prio, Just max_prio, Just affinity, resume) ->
             Just $ TCBExtraInfo addr (Just ip) (Just sp) (Just prio) (Just max_prio) (Just affinity) resume
+        (Just addr, Just ip, Just sp, Just prio, Just max_prio, Nothing, resume) ->
+            Just $ TCBExtraInfo addr (Just ip) (Just sp) (Just prio) (Just max_prio) Nothing resume
         (Just addr, Nothing, Nothing, Nothing, Nothing, Just affinity, resume) ->
             Just $ TCBExtraInfo addr Nothing Nothing Nothing Nothing (Just affinity) resume
         (Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing) -> Nothing
